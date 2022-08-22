@@ -56,7 +56,7 @@ export default {
   },
   computed: {
     extention() {
-      return this.file.name.split(".")[1];
+      return this.file.name.substring(this.file.name.lastIndexOf('.')+1, this.file.name.length) || this.file.name;
     },
   },
 };

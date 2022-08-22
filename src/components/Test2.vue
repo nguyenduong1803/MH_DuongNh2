@@ -67,19 +67,35 @@ export default {
       this.files.splice(index, 1);
     },
     handleChangeFile(e) {
-      this.$refs.fileItem.style.transition = 0.5 + "s";
       const files = e.target.files || e.dataTransfer.files;
+      const extentions = files[0].name.substring(files[0].name.lastIndexOf('.')+1, files[0].name.length) || files[0].name;
+      // validate
       if (!files.length) {
         this.dragging = false;
-        return;
+      } else if (
+        extentions === "docx" ||
+        extentions === "xlsx" ||
+        extentions === "pdf" ||
+        extentions === "jpg" ||
+        extentions === "png"
+      ) {
+        this.createFile(files[0]);
+      } else if (files[0].size > 10000000) {
+        this.waringUpload = "The maximum file size is 10 MB";
+      } else {
+        this.waringUpload = "Vui lòng chọn tệp word, excel, png, jpg, pdf.";
       }
-      this.createFile(files[0]);
     },
     handleUpload() {
-      if (this.files.length > 0) {
+      if (this.files.length > 0 && this.files.length < 6) {
         this.files.forEach((file, i) => {
           this.upload(file.name, file, i);
         });
+        this.waringUpload = "";
+      } else if (this.files.length >= 6) {
+        this.waringUpload = "Vui lòng chọn số file nhỏ hơn 6";
+      } else {
+        this.waringUpload = "Vui lòng chọn file";
       }
     },
     handleNext() {
@@ -97,7 +113,8 @@ export default {
       }
     },
     upload(name, file) {
-      const imageRef = ref(storage, `images/${name}${v4()}`);
+      // id v4 rename file
+      const imageRef = ref(storage, `myStore/${name}${v4()}`);
       uploadBytes(imageRef, file).then(() => {
         this.files.forEach((item, index) => {
           if (item.name === name) {
@@ -108,10 +125,6 @@ export default {
       });
     },
     createFile(file) {
-      if (file.size > 10000000) {
-        this.waringUpload = "The maximum file size is 10 MB";
-        return;
-      }
       this.files = [...this.files, file];
       this.dragging = false;
       this.waringUpload = "";
