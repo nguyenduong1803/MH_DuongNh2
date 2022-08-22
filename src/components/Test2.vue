@@ -164,7 +164,7 @@ export default {
   position: relative;
   max-width: 842px;
   margin: 33px auto;
-  display: flex;
+  display: inline-flex;
   gap: 17px;
   transition: 0.5s;
 }
