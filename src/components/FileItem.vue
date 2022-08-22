@@ -4,7 +4,6 @@
     @dragstart="handleDrag"
     :id="'drag' + index"
     ref="refFile"
-    class="wrap"
   >
     <div class="wrap_file">
       <img
@@ -69,8 +68,7 @@ export default {
   padding: 0;
   margin: 0;
 }
-.wrap {
-}
+
 .file_info {
   flex: 1;
   white-space: nowrap;
