@@ -24,7 +24,7 @@
         alt="pdf"
         class="file_icon"
       />
-      <img v-else src="../assets/excel (1).png" alt="pdf" class="file_icon" />
+      <img v-else src="../assets/more.png" alt="pdf" class="file_icon" />
       <div class="file_info">
         <h2 class="file_name">{{ file.name }}</h2>
         <p class="file_size">{{ file.size }}kb</p>
