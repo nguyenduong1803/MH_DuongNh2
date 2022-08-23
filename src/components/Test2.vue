@@ -13,7 +13,7 @@
         <img
           @click="handleUpload"
           class="cloud_icon"
-          src="../assets/upload 2.png"
+          src="../assets/upload2.png"
         />
         <div class="file_info">
           <h2 class="browser_file_title">Drag and drop files</h2>
